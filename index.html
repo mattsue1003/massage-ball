@@ -44,6 +44,11 @@ header.top h1 small { display: block; font-family: var(--f-mono); font-size: 11p
 .stats { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13px; color: var(--muted); }
 @media (max-width: 600px) { .stats { display: none; } header.top { padding-block: 16px 10px; } }
 .stats b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.buy { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--ball); color: var(--ball); background: var(--ball-soft); border-radius: 999px; padding: 5px 13px; font-size: 13px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+.buy:hover { background: var(--ball); color: var(--paper); }
+.buy .dot { width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #ffd3a6, var(--ball) 55%, #8a3a0a); flex: none; }
+.headright { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+@media (max-width: 600px) { .headright { width: 100%; } }
 
 .bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 6; background: var(--bg); border-block: 1px solid var(--line); }
 .bar .wrap { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding-block: 9px; }
@@ -193,7 +198,7 @@ tbody th { white-space: nowrap; }
 
 <header class="top wrap">
   <h1><small>MASSAGE BALL · ANATOMICAL ATLAS</small>按摩球影音資料庫</h1>
-  <div class="stats" id="stats"></div>
+  <div class="headright"><div class="stats" id="stats"></div><a class="buy" href="https://www.goodhealthy.com.tw/products/adlmassageball" target="_blank" rel="noopener"><span class="dot" aria-hidden="true"></span>購買按摩球</a></div>
 </header>
 
 <div class="bar">
@@ -661,7 +666,7 @@ function renderPanel() {
   let head;
   if (sel && state.tab === "parts") head = `<div class="info"><span class="eyebrow">部位</span><h2>${esc(PARTS[sel].n)}</h2><dl><dt>主要肌群</dt><dd>${esc(PARTS[sel].m)}</dd><dt>常見問題</dt><dd>${esc(PARTS[sel].q)}</dd></dl><button class="clear" data-clear>清除選取</button></div>`;
   else if (sel) head = `<div class="info"><span class="eyebrow">問題 ${PROB_ORDER.indexOf(sel) + 1}</span><h2>${esc(PROBS[sel].n)}</h2><dl><dt>典型症狀</dt><dd>${esc(PROBS[sel].s)}</dd></dl><button class="clear" data-clear>清除選取</button></div>`;
-  else head = `<div class="intro"><h2>${state.tab === "parts" ? "哪裡緊，就點哪裡" : "哪裡痛，就點哪個編號"}</h2><p>${state.tab === "parts" ? "點左邊巨人的肌肉，或下方的部位標籤。" : "點左邊巨人身上的編號痛點，或下方的問題標籤。"}點時間標籤會直接跳到 YouTube 的示範片段。</p></div>`;
+  else head = `<div class="intro"><h2>${state.tab === "parts" ? "哪裡緊，就點哪裡" : "哪裡痛，就點哪個編號"}</h2><p>${state.tab === "parts" ? "點左邊巨人的肌肉，或下方的部位標籤。" : "點左邊巨人身上的編號痛點，或下方的問題標籤。"}點時間標籤會直接跳到 YouTube 的示範片段。還沒有球？<a href="https://www.goodhealthy.com.tw/products/adlmassageball" target="_blank" rel="noopener">購買按摩球</a>。</p></div>`;
   const filtering = !!sel || !!state.q || state.ball;
   const list = VIDEOS.filter(v => videoPass(v) && v.segs.some(s => segMatch(v, s)));
   const hitSegs = list.reduce((a, v) => a + v.segs.filter(s => segMatch(v, s)).length, 0);
@@ -670,7 +675,7 @@ function renderPanel() {
 }
 function guideHTML() {
   return `<div class="guide">
-  <section><h2>單顆按摩球安全準則</h2><p class="sub">物理治療師叮嚀，開始前先看。</p>
+  <section><h2>單顆按摩球安全準則</h2><p class="sub">物理治療師叮嚀，開始前先看。只需要一顆球，<a href="https://www.goodhealthy.com.tw/products/adlmassageball" target="_blank" rel="noopener">這裡可以購買</a>。</p>
     <ol class="rules">
       <li><b>不壓骨頭突起與神經血管處</b>：脊椎正中央棘突、尾椎尖端、膝窩正後方、手肘內側尺神經溝。球要放在兩側的肌肉上。</li>
       <li><b>不要硬滾髂脛束</b>：大腿外側的髂脛束沒有彈性，重壓容易引起滑囊發炎。改放鬆源頭的闊筋膜張肌（褲子前口袋位置）與臀大肌。</li>

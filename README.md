@@ -7,3 +7,4 @@
 - 巨人圖片以 ChatGPT 生成，前、側、後三個角度組成可旋轉展示。
 
 資料來源：`按摩球全方位影音百科資料庫.md`、`台灣按摩球全方位影音資料庫.md`
+- 購買按摩球：https://www.goodhealthy.com.tw/products/adlmassageball
